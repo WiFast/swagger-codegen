@@ -70,11 +70,9 @@ func (a {{classname}}) {{nickname}} ({{#allParams}}{{paramName}} {{{dataType}}}{
 
 {{#returnType}}    response := new({{returnType}})
     _, err := _sling.ReceiveSuccess(response)
-    //fmt.Println("{{operationId}} response: ", response, resp, err)
     return *response, err
 {{/returnType}}{{^returnType}}
     _, err := _sling.ReceiveSuccess(nil)
-    //fmt.Println("{{operationId}} response: void, ", resp, err)
     return err
 {{/returnType}}
 }
