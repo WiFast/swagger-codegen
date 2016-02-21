@@ -242,6 +242,11 @@ public class GoClientCodegen extends DefaultCodegen implements CodegenConfig {
         for (CodegenOperation operation : operations) {
             // http method verb conversion (e.g. PUT => Put)
             operation.httpMethod = camelize(operation.httpMethod.toLowerCase());
+
+            // camelize return type struct names
+            if (operation.returnType != null && !operation.returnType.startsWith("map[") && !operation.returnType.startsWith("[]") && !languageSpecificPrimitives.contains(operation.returnType)) {
+                operation.returnType = camelize(operation.returnType);
+            }
         }
 
         // remove model imports to avoid error
