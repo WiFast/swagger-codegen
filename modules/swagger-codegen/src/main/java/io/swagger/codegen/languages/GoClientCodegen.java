@@ -212,8 +212,15 @@ public class GoClientCodegen extends DefaultCodegen implements CodegenConfig {
             if(languageSpecificPrimitives.contains(type))
                 return (type);
         }
-        else
+        else if (swaggerType == "object") {
+            type = "map[string]interface{}";
+        }
+        else if (swaggerType == "array") {
+            type = "[]interface{}";
+        }
+        else {
             type = swaggerType;
+        }
         return type;
     }
 
